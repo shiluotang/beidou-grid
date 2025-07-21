@@ -10,11 +10,11 @@ namespace org {
 layout_encoder::~layout_encoder() {
 }
 
-layout* layout_encoder::get_layout() const {
+layout const* layout_encoder::get_layout() const {
     return _M_layout;
 }
 
-void layout_encoder::set_layout(layout *value) {
+void layout_encoder::set_layout(layout const *value) {
     _M_layout = value;
 }
 
@@ -124,7 +124,8 @@ zorder_encoder::encode(int ilat, int ilon) {
     if (!get_layout())
         return "";
     std::ostringstream oss;
-    int n = get_layout()->get_lon_ngrids() * std::abs(ilat) + std::abs(ilon);
+    int n = get_layout()->get_lon_ngrids() * std::abs(ilat)
+        + std::abs(ilon);
     oss << n;
     return oss.str();
 }
@@ -135,6 +136,23 @@ lonlat_encoder::lonlat_encoder(
     : _M_lat_encoder(lat_encoder)
     , _M_lon_encoder(lon_encoder)
 {
+}
+
+
+ordinal_encoder& lonlat_encoder::get_lat_encoder() {
+    return _M_lat_encoder;
+}
+
+ordinal_encoder& lonlat_encoder::get_lon_encoder() {
+    return _M_lat_encoder;
+}
+
+void lonlat_encoder::get_lat_encoder(ordinal_encoder const &value) {
+    _M_lat_encoder = value;
+}
+
+void lonlat_encoder::get_lon_encoder(ordinal_encoder const &value) {
+    _M_lon_encoder = value;
 }
 
 std::string

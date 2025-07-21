@@ -1,124 +1,21 @@
-#define _USE_MATH_DEFINES 1
 #include <cmath>
-#include <iomanip>
 
 #include <gtest/gtest.h>
 
-#include <layout.h>
-#include <layout_encoders.h>
+#include "grid_encoder.h"
 
 namespace {
+
+double degrees(double d, double m = 0.0, double s = 0.0) {
+    double v = d;
+    v += m / 60;
+    v += s / 3600;
+    return v;
+}
+
 } // namespace anonymous
 
-int test_point(org::latlon const &point) {
-    using org::grid;
-    using org::layout;
-    using org::layout_encoder;
-    using org::zorder_encoder;
-    using org::ordinal_encoder;
-    using org::lonlat_encoder;
-    using org::latlon;
-    grid g(latlon(-88, -180), latlon(88, 180));
-    grid subgrid;
-    std::vector<layout> layouts;
-    layouts.push_back(layout(60, 44, latlon(0, -180)));
-    layouts.push_back(layout(12, 8, latlon(0, 0)));
-    layouts.push_back(layout(2, 3, latlon(0, 0)));
-    layouts.push_back(layout(15, 10, latlon(0, 0)));
-    layouts.push_back(layout(15, 15, latlon(0, 0)));
-    layouts.push_back(layout(2, 2, latlon(0, 0)));
-    layouts.push_back(layout(8, 8, latlon(0, 0)));
-    layouts.push_back(layout(8, 8, latlon(0, 0)));
-    layouts.push_back(layout(8, 8, latlon(0, 0)));
-    layouts.push_back(layout(8, 8, latlon(0, 0)));
-    std::vector<std::shared_ptr<layout_encoder>> layout_encoders;
-    // level 1
-    layout_encoders.push_back(
-            std::make_shared<lonlat_encoder>(ordinal_encoder::digits(1, 2), ordinal_encoder::alphabet('A')));
-    // level 2
-    layout_encoders.push_back(
-            std::make_shared<lonlat_encoder>(ordinal_encoder::xdigits(), ordinal_encoder::xdigits()));
-    // level 3
-    layout_encoders.push_back(std::make_shared<zorder_encoder>());
-    // level 4
-    layout_encoders.push_back(
-            std::make_shared<lonlat_encoder>(ordinal_encoder::xdigits(), ordinal_encoder::xdigits()));
-    // level 5
-    layout_encoders.push_back(
-            std::make_shared<lonlat_encoder>(ordinal_encoder::xdigits(), ordinal_encoder::xdigits()));
-    // level 6
-    layout_encoders.push_back(std::make_shared<zorder_encoder>());
-    // level 7
-    layout_encoders.push_back(
-            std::make_shared<lonlat_encoder>(ordinal_encoder::xdigits(), ordinal_encoder::xdigits()));
-    // level 8
-    layout_encoders.push_back(
-            std::make_shared<lonlat_encoder>(ordinal_encoder::xdigits(), ordinal_encoder::xdigits()));
-    // level 9
-    layout_encoders.push_back(
-            std::make_shared<lonlat_encoder>(ordinal_encoder::xdigits(), ordinal_encoder::xdigits()));
-    // level 10
-    layout_encoders.push_back(
-            std::make_shared<lonlat_encoder>(ordinal_encoder::xdigits(), ordinal_encoder::xdigits()));
-    std::cout << "----------------------------------" << std::endl;
-    std::cout << "g = " << g << std::endl;
-    int ilat, ilon;
-    unsigned int lat_ngrids = 1;
-    unsigned int lon_ngrids = 1;
-    std::ostringstream oss;
-    oss << (point.get_lat() >= 0 ? "N" : "S");
-    for (size_t i = 0, n = layouts.size(); i < n; ++i) {
-        subgrid = layouts[i].find_subgrid(g, point, ilat, ilon);
-        lat_ngrids *= layouts[i].get_lat_ngrids();
-        lon_ngrids *= layouts[i].get_lon_ngrids();
-        std::cout << "level = " << (i + 1) << std::endl;
-        std::cout << "lat_ngrids = " << layouts[i].get_lat_ngrids() << std::endl;
-        std::cout << "lon_ngrids = " << layouts[i].get_lon_ngrids() << std::endl;
-        std::cout << "subgrid = " << subgrid << std::endl;
-        std::cout << "ilon = " << ilon << std::endl;
-        std::cout << "ilat = " << ilat << std::endl;
-        if (!g.contains(subgrid) && g != subgrid)
-            return false;
-        if (i < layout_encoders.size()) {
-            layout_encoders[i]->set_layout(&layouts[i]);
-            std::string code = layout_encoders[i]->encode(ilat, ilon);
-            std::cout << "code = " << code << std::endl;
-            oss << code;
-        }
-        g = subgrid;
-    }
-    std::cout << oss.str() << std::endl;
-    return true;
-}
-
-TEST(gtest_hello, test1) {
-    ASSERT_TRUE(test_point(org::latlon(31, 121)));
-    ASSERT_TRUE(test_point(org::latlon(-31, 121)));
-    ASSERT_TRUE(test_point(org::latlon(-31, -121)));
-    ASSERT_TRUE(test_point(org::latlon(31, -121)));
-    ASSERT_TRUE(test_point(org::latlon(0, 0)));
-}
-
-TEST(gtest_hello, test2) {
-    double const R = 6371000;
-    double const PI = std::asin(1) * 2;
-    double const DEG2RAD = PI / 180;
-    double const RAD2DEG = 180 / PI;
-    double const L = 0.015;
-    double theta = 0;
-    theta = L / R * RAD2DEG;
-    double degs = theta;
-    double mins = theta * 60;
-    double secs = mins * 60;
-    std::cout
-        << "L(" << L << " m)"
-        << " = " << theta << " deg"
-        << " = " << mins << " min"
-        << " = " << secs << " sec"
-        << std::endl;
-}
-
-TEST(gtest_hello, test3) {
+TEST(gtest_encoder, test_nearest_corner) {
     using org::grid;
     using org::latlon;
     latlon lb(28, 120);
@@ -130,4 +27,24 @@ TEST(gtest_hello, test3) {
     ASSERT_EQ(g.get_right_top(), rt);
     ASSERT_EQ(g.get_left_top(), lt);
     ASSERT_EQ(g.get_right_bottom(), rb);
+}
+
+TEST(gtest_encoder, test_real_data) {
+    using org::grid_encoder;
+    using org::latlon;
+    grid_encoder encoder;
+    std::map<std::string, latlon> data;
+    data["N50J475493E"] = latlon(
+            degrees(39, 59, 56.1444),
+            degrees(116, 19, 14.3184));
+    data["N50J475491E"] = latlon(
+            degrees(39, 59, 59.7012),
+            degrees(116, 19, 5.9808));
+    data["N50J475492E"] = latlon(
+            degrees(39, 59, 56.5260),
+            degrees(116, 19, 9.3540));
+
+    for (auto it = data.begin(), e = data.end(); it != e; ++it) {
+        ASSERT_EQ(encoder.encode(it->second, 5), it->first);
+    }
 }

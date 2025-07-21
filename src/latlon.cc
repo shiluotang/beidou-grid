@@ -100,6 +100,8 @@ latlon& latlon::negate_self() {
 }
 
 bool latlon::equals(latlon const &other) const {
+    if (this == &other)
+        return true;
     return _M_lat == other._M_lat
         && _M_lon == other._M_lon;
 }
