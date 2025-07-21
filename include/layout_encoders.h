@@ -11,13 +11,13 @@ class layout_encoder {
 public:
     virtual
     ~layout_encoder();
-    layout* get_layout() const;
-    void set_layout(layout*);
+    layout const* get_layout() const;
+    void set_layout(layout const*);
     virtual
     std::string encode(int ilat, int ilon);
 protected:
 private:
-    layout *_M_layout;
+    layout const *_M_layout;
 };
 
 class ordinal_encoder {
@@ -73,6 +73,12 @@ public:
     lonlat_encoder(
             ordinal_encoder const &lon_encoder,
             ordinal_encoder const &lat_encoder);
+
+    ordinal_encoder& get_lat_encoder();
+    ordinal_encoder& get_lon_encoder();
+    void get_lat_encoder(ordinal_encoder const&);
+    void get_lon_encoder(ordinal_encoder const&);
+
     virtual
     std::string encode(int ilat, int ilon);
 protected:

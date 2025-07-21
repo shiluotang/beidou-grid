@@ -12,7 +12,7 @@ public:
     layout(
             int lon_ngrids,
             int lat_ngrids,
-            latlon const&);
+            latlon const& = latlon());
     layout();
 
     int get_lat_ngrids() const;

@@ -77,7 +77,8 @@ bool grid::contains(latlon const &point) const {
 }
 
 bool grid::contains(grid const &g) const {
-    return contains(g.get_left_bottom()) && contains(g.get_right_top());
+    return contains(g.get_left_bottom())
+        && contains(g.get_right_top());
 }
 
 latlon grid::nearest_corner(latlon const &origin, int *quadrant) const {
