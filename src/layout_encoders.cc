@@ -138,7 +138,6 @@ lonlat_encoder::lonlat_encoder(
 {
 }
 
-
 ordinal_encoder& lonlat_encoder::get_lat_encoder() {
     return _M_lat_encoder;
 }

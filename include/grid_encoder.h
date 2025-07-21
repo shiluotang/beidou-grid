@@ -12,6 +12,7 @@ public:
     std::string encode(double lat, double lon, int max_level = 10);
     std::string encode(latlon const&, int max_level = 10);
 protected:
+    void init();
 private:
     grid _M_grid0;
     level_manager _M_level_manager;
