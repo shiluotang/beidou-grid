@@ -57,13 +57,9 @@ grid layout::find_subgrid(
     double lon_h = g.lon_degrees() / _M_lon_ngrids;
     int quadrant = 0;
     latlon origin = g.nearest_corner(_M_origin, &quadrant);
-    double olat = origin.get_lat();
-    double olon = origin.get_lon();
     latlon p2 = p - origin;
     ilat = static_cast<int>(p2.get_lat() / lat_h);
     ilon = static_cast<int>(p2.get_lon() / lon_h);
-    latlon a;
-    latlon b;
     int dlat_sign = 1;
     int dlon_sign = 1;
     switch (quadrant) {
@@ -88,6 +84,10 @@ grid layout::find_subgrid(
             dlon_sign = (ilon >= 0 ? 1 : -1);
             break;
     }
+    latlon a;
+    latlon b;
+    double olat = origin.get_lat();
+    double olon = origin.get_lon();
     a.set_lat(olat + (ilat + 0) * lat_h);
     a.set_lon(olon + (ilon + 0) * lon_h);
     b.set_lat(olat + (ilat + 1 * dlat_sign) * lat_h);
