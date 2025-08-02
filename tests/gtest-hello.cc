@@ -16,8 +16,8 @@ double degrees(double d, double m = 0.0, double s = 0.0) {
 } // namespace anonymous
 
 TEST(gtest_encoder, test_nearest_corner) {
-    using org::grid;
-    using org::latlon;
+    using beidou::grid::grid;
+    using beidou::grid::latlon;
     latlon lb(28, 120);
     latlon rt(32, 126);
     latlon lt(32, 120);
@@ -30,8 +30,8 @@ TEST(gtest_encoder, test_nearest_corner) {
 }
 
 TEST(gtest_encoder, test_real_data) {
-    using org::grid_encoder;
-    using org::latlon;
+    using beidou::grid::grid_encoder;
+    using beidou::grid::latlon;
     grid_encoder encoder;
     std::map<std::string, latlon> data;
     data["N50J475493E"] = latlon(

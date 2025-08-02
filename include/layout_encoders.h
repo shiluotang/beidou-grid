@@ -4,7 +4,8 @@
 #include <cmath>
 #include <string>
 
-namespace org {
+namespace beidou {
+namespace grid {
 
 class layout;
 class layout_encoder {
@@ -87,6 +88,7 @@ private:
     ordinal_encoder _M_lon_encoder;
 };
 
-} // namespace org
+} // namespace grid
+} // namespace beidou
 
 #endif // BEIDOU_GRID_FIELD_ENCODER_H_INCLUDED

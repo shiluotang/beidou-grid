@@ -5,7 +5,8 @@
 
 #include "level_settings.h"
 
-namespace org {
+namespace beidou {
+namespace grid {
 
 class level_manager {
 public:
@@ -18,6 +19,7 @@ private:
     std::vector<level_settings> _M_levels;
 };
 
-} // namespace org
+} // namespace grid
+} // namespace beidou
 
 #endif // BEIDOU_GRID_LEVEL_MANAGER_H_INCLUDED

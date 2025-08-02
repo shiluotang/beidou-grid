@@ -4,7 +4,8 @@
 #include "latlon.h"
 #include "level_manager.h"
 
-namespace org {
+namespace beidou {
+namespace grid {
 
 class grid_encoder {
 public:
@@ -18,6 +19,7 @@ private:
     level_manager _M_level_manager;
 };
 
-} // namespace org
+} // namespace grid
+} // namespace beidou
 
 #endif // BEIDOU_GRID_ENCODER_H_INCLUDED

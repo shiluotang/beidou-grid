@@ -2,12 +2,12 @@
 #include <algorithm>
 #include <iostream>
 
-#include "latlon.h"
 #include "printable.h"
-
+#include "latlon.h"
 #include "grid.h"
 
-namespace org {
+namespace beidou {
+namespace grid {
 
 grid::grid(latlon const &a, latlon const &b)
     : _M_left_bottom()
@@ -123,4 +123,5 @@ bool grid::equals(grid const &other) const {
         && _M_right_top == other._M_right_top;
 }
 
-} // namespace org
+} // namespace grid
+} // namespace beidou

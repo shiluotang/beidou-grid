@@ -5,7 +5,8 @@
 #include "layout.h"
 #include "layout_encoders.h"
 
-namespace org {
+namespace beidou {
+namespace grid {
 
 layout_encoder::~layout_encoder() {
 }
@@ -162,4 +163,5 @@ lonlat_encoder::encode(int ilat, int ilon) {
     return oss.str();
 }
 
-} // namespace org
+} // namespace grid
+} // namespace beidou

@@ -6,7 +6,8 @@
 #include "printable.h"
 #include "latlon.h"
 
-namespace org {
+namespace beidou {
+namespace grid {
 
 class grid
     : public printable {
@@ -42,6 +43,7 @@ private:
     latlon _M_right_top;
 };
 
-} // namespace org
+} // namespace grid
+} // namespace beidou
 
 #endif // BEIDOU_GRID_GRID_H_INCLUDED

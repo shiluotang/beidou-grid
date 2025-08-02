@@ -3,7 +3,8 @@
 
 #include <iosfwd>
 
-namespace org {
+namespace beidou {
+namespace grid {
 
 class printable {
 public:
@@ -17,6 +18,7 @@ private:
 
 std::ostream& operator<<(std::ostream&, printable const&);
 
-} // namespace org
+} // namespace grid
+} // namespace beidou
 
 #endif // BEIDOU_GRID_PRINTABLE_H_INCLUDED

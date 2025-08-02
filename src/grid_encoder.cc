@@ -5,8 +5,8 @@
 #include "layout_encoders.h"
 #include "grid_encoder.h"
 
-namespace org {
-
+namespace beidou {
+namespace grid {
 
 grid_encoder::grid_encoder()
     : _M_grid0(latlon(-88, -180), latlon(88, 180))
@@ -96,4 +96,5 @@ void grid_encoder::init() {
     _M_level_manager.set_settings(10, level);
 }
 
-} // namespace org
+} // namespace grid
+} // namespace beidou

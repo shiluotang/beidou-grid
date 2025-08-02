@@ -6,7 +6,9 @@
 #include "grid.h"
 #include "layout.h"
 
-namespace org {
+namespace beidou {
+namespace grid {
+
 layout::layout(
         int lon_ngrids,
         int lat_ngrids,
@@ -103,4 +105,5 @@ void layout::print(std::ostream &out) const {
         << "}";
 }
 
-} // namespace org
+} // namespace grid
+} // namespace beidou

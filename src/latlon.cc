@@ -2,7 +2,8 @@
 
 #include "latlon.h"
 
-namespace org {
+namespace beidou {
+namespace grid {
 
 latlon::latlon(double lat, double lon)
     : _M_lat(lat)
@@ -106,4 +107,5 @@ bool latlon::equals(latlon const &other) const {
         && _M_lon == other._M_lon;
 }
 
-} // namespace org
+} // namespace grid
+} // namespace beidou

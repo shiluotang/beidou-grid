@@ -2,7 +2,8 @@
 
 #include "printable.h"
 
-namespace org {
+namespace beidou {
+namespace grid {
 
 printable::~printable() {
 }
@@ -16,4 +17,5 @@ std::ostream& operator<<(std::ostream &os, printable const &obj) {
     return os;
 }
 
-} // namespace org
+} // namespace grid
+} // namespace beidou

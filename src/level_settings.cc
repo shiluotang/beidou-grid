@@ -2,7 +2,8 @@
 
 #include "level_settings.h"
 
-namespace org {
+namespace beidou {
+namespace grid {
 
 layout const& level_settings::get_layout() const {
     return _M_layout;
@@ -26,4 +27,5 @@ void level_settings::set_encoder(
     _M_encoder = value;
 }
 
-} // namespace org
+} // namespace grid
+} // namespace beidou

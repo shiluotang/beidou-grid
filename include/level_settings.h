@@ -6,7 +6,8 @@
 #include "layout.h"
 #include "layout_encoders.h"
 
-namespace org {
+namespace beidou {
+namespace grid {
 
 class level_settings {
 public:
@@ -22,6 +23,7 @@ private:
     std::shared_ptr<layout_encoder> _M_encoder;
 };
 
-} // namespace org
+} // namespace grid
+} // namespace beidou
 
 #endif // BEIDOU_GRID_LEVEL_SETTINGS_H_INCLUDED
