@@ -1,5 +1,5 @@
-#ifndef BEIDOU_GRID_FIELD_ENCODER_H_INCLUDED
-#define BEIDOU_GRID_FIELD_ENCODER_H_INCLUDED
+#ifndef BEIDOU_GRID_LAYOUT_ENCODERS_H_INCLUDED
+#define BEIDOU_GRID_LAYOUT_ENCODERS_H_INCLUDED
 
 #include <cmath>
 #include <string>
@@ -91,4 +91,4 @@ private:
 } // namespace grid
 } // namespace beidou
 
-#endif // BEIDOU_GRID_FIELD_ENCODER_H_INCLUDED
+#endif // BEIDOU_GRID_LAYOUT_ENCODERS_H_INCLUDED
